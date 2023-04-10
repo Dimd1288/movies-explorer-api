@@ -1,0 +1,27 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimd1288/movies-explorer-api.git"
+  },
+  "author": "Dmitriy Domrachev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dimd1288/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Dimd1288/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.22"
+  }
+}
