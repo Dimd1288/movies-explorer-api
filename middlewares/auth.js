@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { KEY } = require('../utils/constants');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const UnathorizedError = require('../errors/unathorized-error');
 
 module.exports = (req, res, next) => {
@@ -14,7 +15,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, KEY);
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     return next(new UnathorizedError('Неверная подпись токена'));
   }
