@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { getMovies, createMovie, deleteMovie } = require('../controllers/movies')
 const { celebrate, Joi } = require('celebrate');
+const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 const { URL_REG_EXP } = require('../utils/constants');
 
 router.get('/', getMovies);
@@ -17,7 +17,7 @@ router.post('/', celebrate({
     thumbnail: Joi.string().required().pattern(URL_REG_EXP),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
-    nameEN: Joi.string().required()
+    nameEN: Joi.string().required(),
   }),
 }), createMovie);
 
