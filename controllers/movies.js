@@ -7,7 +7,7 @@ const ForbiddenError = require('../errors/forbidden-error');
 const { CREATED } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => res.send(movies))
     .catch(next);
 };
@@ -53,13 +53,13 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findOne({ movieId: req.params.movieId }).orFail(() => {
+  Movie.findById(req.params.id).orFail(() => {
     throw new NotFoundError('Фильм с указанным _id не найден');
   }).then((movie) => {
     if (JSON.stringify(movie.owner._id) !== JSON.stringify(req.user._id)) {
       throw new ForbiddenError('Недостаточно прав для выполнения операции');
     }
-    Movie.findOneAndRemove({ movieId: req.params.movieId })
+    Movie.findByIdAndRemove(req.params.id)
       .then(() => res.send(movie))
       .catch(next);
   })

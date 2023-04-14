@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 
+const { NODE_ENV, MONGO_PROD } = process.env;
+
 const { PORT = 3000 } = process.env;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,6 +11,7 @@ const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { MONGO_DEV } = require('./utils/constants');
 
 const app = express();
 
@@ -17,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? MONGO_PROD : MONGO_DEV);
 
 app.use(requestLogger);
 
