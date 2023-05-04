@@ -15,7 +15,7 @@ const { MONGO_DEV } = require('./utils/constants');
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:3001'], credentials: true, maxAge: 30 }));
+app.use(cors({ origin: ['http://localhost:3001', 'http://localhost:3000'], credentials: true, maxAge: 30 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
